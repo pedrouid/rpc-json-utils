@@ -1,4 +1,4 @@
-import { payloadId } from 'rpc-payload-id';
+import * as rpcPayloadId from 'rpc-payload-id';
 
 import {
   getError,
@@ -13,6 +13,8 @@ import {
   JsonRpcRequest,
   JsonRpcResult,
 } from './types';
+
+export const payloadId = rpcPayloadId.payloadId;
 
 export function formatJsonRpcRequest(
   method: string,
