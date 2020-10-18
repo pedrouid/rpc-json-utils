@@ -1,24 +1,10 @@
 import { ErrorResponse } from './types';
 import {
   INTERNAL_ERROR,
-  INVALID_PARAMS,
-  INVALID_REQUEST,
-  METHOD_NOT_FOUND,
-  PARSE_ERROR,
-  SERVER_ERROR,
+  SERVER_ERROR_CODE_RANGE,
+  RESERVED_ERROR_CODES,
+  STANDARD_ERROR_MAP,
 } from './constants';
-
-const RESERVED_ERROR_CODES = [-32700, -32600, -32601, -32602, -32603];
-const SERVER_ERROR_CODE_RANGE = [-32000, -32099];
-
-const STANDARD_ERROR_MAP = {
-  [PARSE_ERROR]: { code: -32700, message: 'Parse error' },
-  [INVALID_REQUEST]: { code: -32600, message: 'Invalid Request' },
-  [METHOD_NOT_FOUND]: { code: -32601, message: 'Method not found' },
-  [INVALID_PARAMS]: { code: -32602, message: 'Invalid params' },
-  [INTERNAL_ERROR]: { code: -32603, message: 'Internal error' },
-  [SERVER_ERROR]: { code: -32000, message: 'Server error' },
-};
 
 export function isServerErrorCode(code: number): boolean {
   return (
@@ -28,6 +14,10 @@ export function isServerErrorCode(code: number): boolean {
 
 export function isReservedErrorCode(code: number): boolean {
   return RESERVED_ERROR_CODES.includes(code);
+}
+
+export function isValidErrorCode(code: number): boolean {
+  return isServerErrorCode(code) || isReservedErrorCode(code);
 }
 
 export function getError(type: string): ErrorResponse {
