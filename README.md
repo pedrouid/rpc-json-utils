@@ -5,17 +5,19 @@ JSON-RPC Utils
 ## API
 
 ```typescript
-interface JsonRpcRequest {
+// ---------- Typings ----------------------------------------------- //
+
+interface JsonRpcRequest<T = any> {
   id: number;
   jsonrpc: string;
   method: string;
-  params: any;
+  params: T;
 }
 
-interface JsonRpcResult {
+interface JsonRpcResult<T = any> {
   id: number;
   jsonrpc: string;
-  result: any;
+  result: T;
 }
 
 interface JsonRpcError {
@@ -29,9 +31,19 @@ interface ErrorResponse {
   message: string;
 }
 
-function formatJsonRpcRequest(method: string, params: any): JsonRpcRequest;
+type JsonRpcResponse<T = any> = JsonRpcResult<T> | JsonRpcError;
 
-function formatJsonRpcResult(id: number, result: any): JsonRpcResult;
+type JsonRpcPayload<P = any, R = any> = JsonRpcRequest<P> | JsonRpcResponse<R>;
+
+// ---------- Formatters ----------------------------------------------- //
+
+function formatJsonRpcRequest<T = any>(
+  method: string,
+  params: T,
+  id?: number
+): JsonRpcRequest<T>;
+
+function formatJsonRpcResult<T = any>(id: number, result: T): JsonRpcResult<T>;
 
 function formatJsonRpcError(
   id: number,
@@ -39,4 +51,20 @@ function formatJsonRpcError(
 ): JsonRpcError;
 
 function formatErrorMessage(error?: string | ErrorResponse): ErrorResponse;
+
+// ---------- Validators ----------------------------------------------- //
+
+function isJsonRpcRequest<T = any>(
+  payload: JsonRpcPayload
+): payload is JsonRpcRequest<T>;
+
+function isJsonRpcResponse<T = any>(
+  payload: JsonRpcPayload
+): payload is JsonRpcResponse<T>;
+
+function isJsonRpcResult<T = any>(
+  payload: JsonRpcPayload
+): payload is JsonRpcResult<T>;
+
+function isJsonRpcError(payload: JsonRpcPayload): payload is JsonRpcError;
 ```

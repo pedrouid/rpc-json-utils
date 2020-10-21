@@ -16,19 +16,23 @@ import {
 
 export const payloadId = rpcPayloadId.payloadId;
 
-export function formatJsonRpcRequest(
+export function formatJsonRpcRequest<T = any>(
   method: string,
-  params: any
-): JsonRpcRequest {
+  params: T,
+  id?: number
+): JsonRpcRequest<T> {
   return {
-    id: payloadId(),
+    id: id || payloadId(),
     jsonrpc: '2.0',
     method,
     params,
   };
 }
 
-export function formatJsonRpcResult(id: number, result: any): JsonRpcResult {
+export function formatJsonRpcResult<T = any>(
+  id: number,
+  result: T
+): JsonRpcResult<T> {
   return {
     id,
     jsonrpc: '2.0',

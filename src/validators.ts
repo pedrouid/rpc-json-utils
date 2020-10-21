@@ -6,21 +6,21 @@ import {
   JsonRpcResult,
 } from './types';
 
-export function isJsonRpcRequest<T>(
+export function isJsonRpcRequest<T = any>(
   payload: JsonRpcPayload
 ): payload is JsonRpcRequest<T> {
   return 'method' in payload;
 }
 
-export function isJsonRpcResponse(
+export function isJsonRpcResponse<T = any>(
   payload: JsonRpcPayload
-): payload is JsonRpcResponse {
+): payload is JsonRpcResponse<T> {
   return !isJsonRpcRequest(payload);
 }
 
-export function isJsonRpcResult(
+export function isJsonRpcResult<T = any>(
   payload: JsonRpcPayload
-): payload is JsonRpcResult {
+): payload is JsonRpcResult<T> {
   return 'result' in payload;
 }
 
