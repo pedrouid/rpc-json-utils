@@ -27,3 +27,17 @@ export type JsonRpcResponse<T = any> = JsonRpcResult<T> | JsonRpcError;
 export type JsonRpcPayload<P = any, R = any> =
   | JsonRpcRequest<P>
   | JsonRpcResponse<R>;
+
+export abstract class IJsonRpcProvider {
+  //connection
+  public abstract connect(params?: any): Promise<void>;
+  public abstract disconnect(params?: any): Promise<void>;
+
+  // events
+  public abstract on(event: string, listener: any): void;
+  public abstract once(event: string, listener: any): void;
+  public abstract off(event: string, listener: any): void;
+
+  // jsonrpc
+  public abstract request(payload: JsonRpcRequest): Promise<any>;
+}
