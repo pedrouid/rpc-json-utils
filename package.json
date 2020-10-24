@@ -36,6 +36,7 @@
     "prepare": "yarn lint && yarn build && yarn test"
   },
   "dependencies": {
+    "rpc-json-types": "^1.0.0",
     "rpc-payload-id": "^1.0.1"
   },
   "devDependencies": {

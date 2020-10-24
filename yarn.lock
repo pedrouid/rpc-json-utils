@@ -6400,6 +6400,11 @@ rollup@^1.27.8:
     "@types/node" "*"
     acorn "^7.1.0"
 
+rpc-json-types@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/rpc-json-types/-/rpc-json-types-1.0.0.tgz#9d2b64118f5c730b05f1ab3baea9e1a4a291bd97"
+  integrity sha512-S2y8vrSgnieJVvFO6bqRm9Upq3QcfHujQFfilosipRPUCz3ZddRJWoVCRW0TmEA0O4uqlVQaB9sbsRRAbT2stA==
+
 rpc-payload-id@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/rpc-payload-id/-/rpc-payload-id-1.0.1.tgz#1052082d3255a7d934097f3bbe464021ab16dc84"
